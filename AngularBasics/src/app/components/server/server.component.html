@@ -1,0 +1,16 @@
+<label for="name">Name</label>
+<input type="text" class="form-control mb-2" [(ngModel)]="serverName" />
+<button
+  class="btn btn-primary"
+  [disabled]="!allowedNewServer"
+  (click)="onCreateServer()"
+>
+  Add Server
+</button>
+<!--By using innserText property-->
+<p [innerText]="allowedNewServer"></p>
+<p>{{ allowedNewServer }}</p>
+<p>{{ serverCreationStatus }}</p>
+<p *ngIf="serverCreated">Server was crteted with name is {{ serverName }}</p>
+<p>No Server was created!</p>
+<p>Server id with {{ serverId }} is {{ serverStatus }}</p>

@@ -1,0 +1,19 @@
+<div class="container">
+  <ol>
+    <li>Add a input filed which updates the username two way binding</li>
+    <li>Output he property via String interpoltion</li>
+    <li>Add a button which may only be clicked if the username is not empty</li>
+    <li>Upon clicking username should be setting as empty string</li>
+  </ol>
+  <hr />
+
+  <label for="username">Username</label>
+  <input type="text" class="form-control" [(ngModel)]="username" />
+  <input
+    type="button"
+    class="btn btn-success btn-block mt-4"
+    value="Save"
+    [disabled]="username === ''"
+    (click)="onReset()"
+  />
+</div>

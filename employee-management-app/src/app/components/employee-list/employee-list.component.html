@@ -1,0 +1,19 @@
+<div class="container">
+  <table class="table table-boardered table-striped">
+    <tr *ngFor="let employee of employeeService.employees">
+      <td (click)="populateForm(employee)">
+        {{ employee.employeeCode }}-{{ employee.employeeName }}
+      </td>
+      <td (click)="populateForm(employee)">{{ employee.employeePosition }}</td>
+      <td (click)="populateForm(employee)">{{ employee.employeeMobile }}</td>
+      <td>
+        <button
+          class="btn btn-outline-danger"
+          (click)="deleteEmp(employee.employeeId)"
+        >
+          X
+        </button>
+      </td>
+    </tr>
+  </table>
+</div>

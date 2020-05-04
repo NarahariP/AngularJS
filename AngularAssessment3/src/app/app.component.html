@@ -1,0 +1,37 @@
+<div class="container">
+  <ol>
+    <li>Add button which say 'Display Details'</li>
+    <li>Add a paragraph with any content your choice</li>
+    <li>Toggle of the dipaly of the paragraph with the button created</li>
+    <li>Log all button clicks in Array and output array below the paragraph</li>
+    <li>
+      Starting at the 5th log item, give all the future log item a blue
+      background via ngStyle and white color via ngClass
+    </li>
+  </ol>
+  <hr />
+  <!--<button
+    class="btn btn-success btn-block"
+    (click)="displyDetails = !displyDetails"
+  >
+    Dispaly Details
+  </button> -->
+  <button class="btn btn-success btn-block" (click)="onToggleDetails()">
+    Dispaly Details
+  </button>
+  <p class="py-4" *ngIf="displyDetails">
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi officiis
+    ipsam placeat expedita sint, accusantium dolores quia blanditiis? Cum vitae
+    voluptatum facere temporibus accusamus sunt quo eos, veritatis dolore
+    voluptatem perferendis. Ad vel exercitationem quo, porro dolore quisquam
+    reiciendis sapiente iure quae repellendus sed quaerat expedita ullam
+    laboriosam earum nemo.
+  </p>
+  <p
+    *ngFor="let log of logs"
+    [ngStyle]="{ backgroundColor: log >= 5 ? 'blue' : 'transparent' }"
+    [ngClass]="{ white: log >= 5 }"
+  >
+    {{ log }}
+  </p>
+</div>

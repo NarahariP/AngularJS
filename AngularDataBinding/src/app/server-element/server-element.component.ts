@@ -10,6 +10,8 @@ import {
   AfterViewInit,
   AfterViewChecked,
   OnDestroy,
+  ViewChild,
+  ElementRef,
 } from '@angular/core';
 
 @Component({
@@ -28,7 +30,7 @@ export class ServerElementComponent
     AfterViewChecked,
     OnDestroy {
   @Input('serverAlias') server: { type: string; name: string; content: string };
-
+  @ViewChild('heading') heading: ElementRef;
   constructor() {
     console.log('Constructor Called!');
   }
@@ -38,6 +40,7 @@ export class ServerElementComponent
   }
   ngOnInit(): void {
     console.log('ngOnInit Called!');
+    console.log('Heading : ' + this.heading?.nativeElement.textContent); //? is null check
   }
   ngDoCheck() {
     console.log('ngDoCheck Called!');
@@ -53,6 +56,7 @@ export class ServerElementComponent
 
   ngAfterViewInit() {
     console.log('ngAfterViewInit called!');
+    console.log('Heading : ' + this.heading.nativeElement.textContent);
   }
 
   ngAfterViewChecked() {

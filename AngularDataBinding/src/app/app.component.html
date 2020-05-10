@@ -1,14 +1,14 @@
 <div class="container p-2">
   <app-cockpit
-    (serverCreated)="onServerAdded($event)"
-    (blueprintCreated)="onBlueprintAdded($event)"
+    (serverCreatedWithAlias)="onServerAdded($event)"
+    (blueprintCreatedWithAlias)="onBlueprintAdded($event)"
   ></app-cockpit>
   <hr />
   <div class="row">
     <div class="col-md-12">
       <app-server-element
         *ngFor="let server of servers"
-        [server]="server"
+        [serverAlias]="server"
       ></app-server-element>
     </div>
   </div>

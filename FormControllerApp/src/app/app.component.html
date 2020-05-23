@@ -1,0 +1,108 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8">
+      <form (ngSubmit)="onSubmit()" #f="ngForm">
+        <div id="user-data" ngModelGroup="userData" #userData="ngModelGroup">
+          <!-- ngModelData is used to group the data -->
+          <!-- #userData="ngModelGroup" is added to make this group to be accessble in javascript -->
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input
+              type="text"
+              id="username"
+              class="form-control"
+              ngModel
+              name="username"
+              required
+              #username="ngModel"
+            />
+            <span
+              class="help-black"
+              *ngIf="username.invalid && username.touched"
+              >Please enter username!</span
+            >
+          </div>
+          <button class="btn btn-outline-primary" (click)="onSuggestedName()">
+            Suggest a Question
+          </button>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              type="text"
+              id="email"
+              class="form-control"
+              ngModel
+              name="email"
+              required
+              email
+              #email="ngModel"
+            />
+            <span class="help-black" *ngIf="!email.valid && email.touched"
+              >Please enter valid email!</span
+            >
+            <!--email is to validate the email format-->
+            <!--#email='ngModel' is for validation-->
+          </div>
+        </div>
+        <span class="help-black" *ngIf="!userData.valid && userData.touched"
+          >User Data is invalid</span
+        >
+        <div class="form-group">
+          <label for="secret">Secret Questions?</label>
+          <select
+            name="secret"
+            id="secret"
+            class="form-control"
+            [ngModel]="defaultQuestion"
+            name="secret"
+          >
+            <option value="pet">Your first pet name?</option>
+            <option value="teacher">Your first teacher name?</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="answer">Answer</label>
+          <input
+            id="answer"
+            type="text"
+            class="form-control"
+            name="answer"
+            [(ngModel)]="answer"
+            required
+            #ans="ngModel"
+          />
+          <span class="help-black" *ngIf="!ans.valid && ans.touched"
+            >Please provide answer for secret question!</span
+          >
+          <p>Your Anser: {{ answer }}</p>
+        </div>
+        <div class="form-group" *ngFor="let gender of genders">
+          <label>
+            <input
+              type="radio"
+              name="gender"
+              ngModel
+              class="form-radio"
+              [value]="gender"
+              required
+            /> </label
+          >{{ gender }}
+        </div>
+        <button class="btn btn-secondary mx-2" [disabled]="!f.valid">
+          Preview
+        </button>
+        <button class="btn btn-primary" [disabled]="!priview">Save</button>
+      </form>
+    </div>
+  </div>
+  <div class="row" *ngIf="priview">
+    <div class="col-xs-12">
+      <h3>Your Data</h3>
+      <p>Username: {{ user.username }}</p>
+      <p>Email: {{ user.email }}</p>
+      <p>Secret Question: {{ user.secretQuestion }}</p>
+      <p>Secret Q' Answer:{{ user.secretQuestionAnswer }}</p>
+      <p>Gender:{{ user.gender }}</p>
+    </div>
+  </div>
+</div>

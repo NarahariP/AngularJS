@@ -1,0 +1,73 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8">
+      <!-- 
+        Create a Form with the following Controllers and Validators
+        1) Project name (Should not be empty)
+        2) Mail (Should not be empty and valid email)
+        3) Project status Dropdown with three options: 'Stable', 'Critical' and 'Finished'
+        4) Submit Button
+
+        Add yor own validator which doesn't allow 'Test' as project name
+        Also implement a validator as an async Validator (replace the other one)
+        Upon submitting the form, simply display values to the console
+      -->
+      <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="projectname">Project Name</label>
+          <input
+            type="text"
+            id="projectname"
+            class="form-control"
+            formControlName="projectname"
+          />
+          <span
+            class="help-black"
+            *ngIf="
+              !signUpForm.get('projectname').valid &&
+              signUpForm.get('projectname').touched
+            "
+          >
+            <span *ngIf="signUpForm.get('projectname').errors['required']"
+              >Project name is required!</span
+            >
+            <span *ngIf="signUpForm.get('projectname').errors['forbiddenName']"
+              >Forbidden Project Name please choose another name!</span
+            >
+          </span>
+        </div>
+        <div class="form-group">
+          <label for="email">email</label>
+          <input
+            type="text"
+            id="email"
+            class="form-control"
+            formControlName="email"
+          />
+          <span
+            class="help-black"
+            *ngIf="
+              !signUpForm.get('email').valid && signUpForm.get('email').touched
+            "
+          >
+            <span *ngIf="signUpForm.get('email').errors['required']"
+              >Email is required!</span
+            >
+            <span *ngIf="signUpForm.get('email').errors['emailForbidden']"
+              >Entered email is not valid!</span
+            >Please enter valid Email!
+          </span>
+        </div>
+        <div class="form-group">
+          <label for="status">Status</label>
+          <select class="form-control" id="status" formControlName="status">
+            <option value="stable">Stable</option>
+            <option value="critical">Critical</option>
+            <option value="finished">Finished</option>
+          </select>
+        </div>
+        <button class="btn btn-primary">Save</button>
+      </form>
+    </div>
+  </div>
+</div>

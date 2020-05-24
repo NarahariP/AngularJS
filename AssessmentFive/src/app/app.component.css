@@ -1,0 +1,11 @@
+.container {
+  margin-top: 5px;
+}
+
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+
+.help-black {
+  color: red;
+}

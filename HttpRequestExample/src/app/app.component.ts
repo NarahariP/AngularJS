@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { Post } from './model/post.model';
 
 @Component({
   selector: 'app-root',
@@ -15,8 +16,8 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      title: new FormControl(null),
-      content: new FormControl(null),
+      title: new FormControl(null, Validators.required),
+      content: new FormControl(null, Validators.required),
     });
     this.fetchPost();
   }
@@ -24,7 +25,7 @@ export class AppComponent implements OnInit {
   onSubmit() {
     console.log(this.form.value);
     this.httpClient
-      .post(
+      .post<{ name: string }>(
         'https://mytestproject-b6359.firebaseio.com/posts.json',
         this.form.value
       )
@@ -39,13 +40,14 @@ export class AppComponent implements OnInit {
 
   private fetchPost() {
     this.httpClient
-      .get('https://mytestproject-b6359.firebaseio.com/posts.json')
+      .get<{ [key: string]: Post }>(
+        'https://mytestproject-b6359.firebaseio.com/posts.json'
+      )
       .pipe(
         map((responseData) => {
-          const arrayPost = [];
+          const arrayPost: Post[] = [];
           for (const key in responseData) {
             if (responseData.hasOwnProperty(key)) {
-              console.log(key);
               arrayPost.push({ ...responseData[key], id: key });
             }
           }
